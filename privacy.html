@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>سياسة الخصوصية - تطبيق محفظتي الذكية</title>
+    <link rel="icon" href="https://img.utdstc.com/icon/53e/8cc/53e8cc3c7661ad0765e9f61ce1af48b42af393d554117f0d1f95d67017ec4242" type="image/x-icon">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Tajawal', sans-serif;
+        }
+        
+        :root {
+            --primary: #4e54c8;
+            --primary-dark: #3f43a7;
+            --secondary: #8f94fb;
+            --accent: #ff6b6b;
+            --text: #2d3436;
+            --text-light: #636e72;
+            --background: #f8f9fa;
+            --white: #ffffff;
+            --border: #e9ecef;
+            --success: #20bf6b;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: var(--text);
+            min-height: 100vh;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100" opacity="0.05"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="40" fill="%23000"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            pointer-events: none;
+        }
+        
+        .privacy-container {
+            background: var(--white);
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+            width: 90%;
+            max-width: 1000px;
+            overflow: hidden;
+            animation: fadeIn 0.8s ease;
+            margin: 40px 0;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .header {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: var(--white);
+            padding: 40px 30px 30px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .app-icon {
+            width: 70px;
+            height: 70px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+        
+        .header::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100" opacity="0.1"><defs><pattern id="dots" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="10" cy="10" r="2" fill="%23ffffff"/></pattern></defs><rect width="100" height="100" fill="url(%23dots)"/></svg>');
+            animation: rotate 30s linear infinite;
+            pointer-events: none;
+        }
+        
+        .header h1 {
+            font-size: 32px;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 2;
+            font-weight: 800;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .header p {
+            opacity: 0.9;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 2;
+            font-size: 18px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .last-updated {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            color: var(--white);
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-size: 14px;
+            font-weight: 500;
+            display: inline-block;
+            margin-top: 10px;
+            position: relative;
+            z-index: 2;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .language-selector {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+            background: white;
+            padding: 10px 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            display: flex;
+            gap: 10px;
+        }
+
+        .language-selector button {
+            padding: 8px 15px;
+            border: none;
+            border-radius: 5px;
+            background: var(--primary);
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: bold;
+        }
+
+        .language-selector button:hover {
+            background: var(--secondary);
+            transform: translateY(-2px);
+        }
+
+        .language-selector button.active {
+            background: var(--secondary);
+            box-shadow: 0 0 10px rgba(0,0,0,0.2);
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        .toc {
+            background: var(--background);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 30px;
+            border-left: 5px solid var(--primary);
+        }
+        
+        .toc h3 {
+            color: var(--primary);
+            margin-bottom: 15px;
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .toc h3 i {
+            margin-left: 10px;
+        }
+        
+        .toc ul {
+            list-style: none;
+            columns: 2;
+        }
+        
+        .toc li {
+            margin-bottom: 10px;
+            break-inside: avoid;
+        }
+        
+        .toc a {
+            color: var(--text-light);
+            text-decoration: none;
+            transition: color 0.3s;
+            display: flex;
+            align-items: center;
+        }
+        
+        .toc a:hover {
+            color: var(--primary);
+        }
+        
+        .toc a i {
+            margin-left: 8px;
+            font-size: 12px;
+        }
+        
+        .section {
+            margin-bottom: 40px;
+            scroll-margin-top: 20px;
+        }
+        
+        .section h2 {
+            color: var(--primary);
+            margin-bottom: 15px;
+            font-size: 24px;
+            display: flex;
+            align-items: center;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--border);
+        }
+        
+        .section h2 i {
+            margin-left: 12px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .section p {
+            color: var(--text-light);
+            line-height: 1.8;
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+        
+        .section ul {
+            padding-right: 20px;
+            margin-bottom: 15px;
+        }
+        
+        .section li {
+            margin-bottom: 10px;
+            color: var(--text-light);
+            line-height: 1.7;
+            position: relative;
+        }
+        
+        .section li::before {
+            content: "•";
+            color: var(--primary);
+            font-weight: bold;
+            display: inline-block;
+            width: 1em;
+            margin-left: 10px;
+        }
+        
+        .highlight {
+            background: linear-gradient(120deg, rgba(78, 84, 200, 0.1) 0%, rgba(143, 148, 251, 0.1) 100%);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            border-right: 4px solid var(--primary);
+        }
+        
+        .contact-info {
+            background: var(--background);
+            border-radius: 12px;
+            padding: 25px;
+            text-align: center;
+            margin-top: 30px;
+        }
+        
+        .contact-info h3 {
+            color: var(--primary);
+            margin-bottom: 15px;
+            font-size: 20px;
+        }
+        
+        .contact-details {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            background: var(--white);
+            padding: 12px 20px;
+            border-radius: 30px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+        }
+        
+        .contact-item i {
+            margin-left: 10px;
+            color: var(--primary);
+        }
+        
+        .footer {
+            padding: 25px;
+            text-align: center;
+            background: var(--background);
+            border-top: 1px solid var(--border);
+        }
+        
+        .agree-btn {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: var(--white);
+            border: none;
+            padding: 14px 35px;
+            border-radius: 30px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 6px 15px rgba(78, 84, 200, 0.4);
+        }
+        
+        .agree-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(78, 84, 200, 0.5);
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        @media (max-width: 768px) {
+            .privacy-container {
+                width: 95%;
+                margin: 20px 0;
+                border-radius: 15px;
+            }
+
+            .header {
+                padding: 25px 20px 15px;
+            }
+
+            .header h1 {
+                font-size: 26px;
+            }
+
+            .content {
+                padding: 20px;
+            }
+
+            .toc {
+                padding: 15px;
+            }
+
+            .toc ul {
+                columns: 1;
+            }
+
+            .section {
+                margin-bottom: 25px;
+            }
+
+            .section h2 {
+                font-size: 20px;
+            }
+
+            .contact-details {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .contact-item {
+                width: 100%;
+                max-width: 280px;
+                margin-bottom: 10px;
+            }
+            
+            .language-selector {
+                top: 10px;
+                left: 10px;
+                padding: 8px;
+                flex-direction: column;
+                gap: 5px;
+            }
+            
+            .language-selector button {
+                padding: 6px 10px;
+                font-size: 12px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header {
+                padding: 20px 15px 10px;
+            }
+
+            .header h1 {
+                font-size: 22px;
+            }
+
+            .header p {
+                font-size: 14px;
+            }
+
+            .content {
+                padding: 15px;
+            }
+
+            .section h2 {
+                font-size: 18px;
+            }
+
+            .section p, .section li {
+                font-size: 14px;
+            }
+
+            .highlight {
+                padding: 15px;
+            }
+
+            .agree-btn {
+                padding: 12px 25px;
+                font-size: 14px;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .header h1 {
+                font-size: 20px;
+            }
+
+            .last-updated {
+                font-size: 12px;
+                padding: 6px 15px;
+            }
+
+            .section h2 {
+                font-size: 17px;
+            }
+
+            .section p, .section li {
+                font-size: 13px;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="privacy-container">
+    <div class="language-selector">
+        <button onclick="changeLanguage('ar')" class="active">العربية</button>
+        <button onclick="changeLanguage('en')">English</button>
+        <button onclick="changeLanguage('es')">Español</button>
+    </div>
+
+    <div class="header">
+        <img src="https://img.utdstc.com/icon/53e/8cc/53e8cc3c7661ad0765e9f61ce1af48b42af393d554117f0d1f95d67017ec4242" alt="أيقونة التطبيق" class="app-icon">
+        <h1 data-translate="privacy_title">سياسة الخصوصية</h1>
+        <p data-translate="privacy_description">نحن في تطبيق "محفظتي الذكية" ندرك أهمية الخصوصية والأمان لمستخدمينا، وهذه السياسة توضح كيفية جمعنا واستخدامنا وحماية معلوماتك الشخصية.</p>
+        <span class="last-updated" data-translate="last_updated">آخر تحديث: 15 سبتمبر 2025</span>
+    </div>
+
+    <div class="content">
+        <div class="toc">
+            <h3><i class="fas fa-list"></i> <span data-translate="toc_title">جدول المحتويات</span></h3>
+            <ul>
+                <li><a href="#info-collection"><i class="fas fa-chevron-left"></i> <span data-translate="toc_item1">المعلومات التي نجمعها</span></a></li>
+                <li><a href="#info-usage"><i class="fas fa-chevron-left"></i> <span data-translate="toc_item2">كيفية استخدام المعلومات</span></a></li>
+                <li><a href="#info-sharing"><i class="fas fa-chevron-left"></i> <span data-translate="toc_item3">مشاركة المعلومات</span></a></li>
+                <li><a href="#data-security"><i class="fas fa-chevron-left"></i> <span data-translate="toc_item4">أمان البيانات</span></a></li>
+                <li><a href="#user-rights"><i class="fas fa-chevron-left"></i> <span data-translate="toc_item5">حقوق المستخدم</span></a></li>
+                <li><a href="#children-privacy"><i class="fas fa-chevron-left"></i> <span data-translate="toc_item6">خصوصية الأطفال</span></a></li>
+                <li><a href="#policy-changes"><i class="fas fa-chevron-left"></i> <span data-translate="toc_item7">التغييرات على السياسة</span></a></li>
+                <li><a href="#contact"><i class="fas fa-chevron-left"></i> <span data-translate="toc_item8">التواصل معنا</span></a></li>
+            </ul>
+        </div>
+
+        <div id="info-collection" class="section">
+            <h2><i class="fas fa-database"></i> <span data-translate="section1_title">المعلومات التي نجمعها</span></h2>
+            <p data-translate="section1_p1">نجمع أنواعًا محدودة من المعلومات لتحسين تجربتك في التطبيق وتقديم خدماتنا:</p>
+            <ul>
+                <li data-translate="section1_li1">معلومات الحساب: عند تسجيل الدخول، نجمع البيانات مثل عنوان البريد الإلكتروني واسم المستخدم.</li>
+                <li data-translate="section1_li2">معلومات الجهاز: معرف فريد للجهاز ونموذجه وإصدار نظام التشغيل لأغراض الترخيص والأمان.</li>
+                <li data-translate="section1_li3">بيانات الاستخدام: عددالعمليات المنشأة وتفاعلاتك مع التطبيق.</li>
+                <li data-translate="section1_li4">بيانات الشركة: المعلومات التي تدخلها حول شركتك (الاسم، العنوان، معلومات الاتصال).</li>
+                <li data-translate="section1_li5">الصور: يتم تخزينها محليا في هاتفك ولا يتم رفعها الى اي سيرفر.</li>
+                <li data-translate="section1_li6">كلمة المرور: يتم تخزينها محليا في هاتفك ولا يتم رفعها الى اي سيرفر.</li>
+                <li data-translate="section1_li7">الموقع الجغرافي: يتم طلب منك تفعيل اموقع  بداية التسجيل ليتم انشاء عملتك المحلية وبامكانك ايقافة بعد التسجيل ويمكنك رفض تحديد موقعك.</li>
+            </ul>
+            <div class="highlight">
+                <p data-translate="section1_highlight">نحن لا نجمع أي معلومات شخصية حساسة مثل البيانات المالية أو معلومات الهوية إلا عند الضرورة القصوى لتقديم الخدمة، وذلك بأعلى معايير الأمان.</p>
+            </div>
+        </div>
+
+        <div id="info-usage" class="section">
+            <h2><i class="fas fa-cogs"></i> <span data-translate="section2_title">كيفية استخدام المعلومات</span></h2>
+            <p data-translate="section2_p1">نستخدم المعلومات التي نجمعها للأغراض التالية:</p>
+            <ul>
+                <li data-translate="section2_li1">توفير خدمات التطبيق والوظائف الأساسية.</li>
+                <li data-translate="section2_li2">إدارة نظام الترخيص والتحقق من صحة المستخدم.</li>
+                <li data-translate="section2_li3">تحسين تجربة المستخدم وتطوير ميزات جديدة.</li>
+                <li data-translate="section2_li4">منع الاحتيال وإساءة الاستخدام.</li>
+                <li data-translate="section2_li5">الرد على استفسارات الدعم الفني.</li>
+                <li data-translate="section2_li6">إرسال تحديثات مهمة حول التطبيق (عند الضرورة).</li>
+            </ul>
+        </div>
+
+        <div id="info-sharing" class="section">
+            <h2><i class="fas fa-share-alt"></i> <span data-translate="section3_title">مشاركة المعلومات</span></h2>
+            <p data-translate="section3_p1">نحن لا نبيع أو نؤجر معلوماتك الشخصية لأطراف ثالثة. قد نشارك معلومات محدودة في الحالات التالية:</p>
+            <ul>
+                <li data-translate="section3_li1">مع مزودي الخدمات الذين يساعدوننا في تشغيل التطبيق (مثل Firebase من Google).</li>
+                <li data-translate="section3_li2">عندما يطلب القانون ذلك أو للاستجابة لإجراءات قانونية.</li>
+                <li data-translate="section3_li3">لحماية حقوقنا أو ممتلكاتنا أو سلامة مستخدمينا أو الآخرين.</li>
+            </ul>
+            <div class="highlight">
+                <p data-translate="section3_highlight">جميع شركائنا من مزودي الخدمات ملتزمون بمعايير الخصوصية والأمان ذاتها التي نلتزم بها، ويتم التعامل مع بياناتك بأقصى درجات السرية والحماية.</p>
+            </div>
+        </div>
+
+        <div id="data-security" class="section">
+            <h2><i class="fas fa-shield-alt"></i> <span data-translate="section4_title">أمان البيانات</span></h2>
+            <p data-translate="section4_p1">نحن نستخدم إجراءات أمنية متعددة لحماية بياناتك:</p>
+            <ul>
+                <li data-translate="section4_li1">يتم تخزين بيانات الحساب والأجهزة على خوادم Firebase المشفرة.</li>
+                <li data-translate="section4_li2">يتم تخزين بيانات صورتك وكلمة المرور محليًا على جهازك فقط.</li>
+                <li data-translate="section4_li3">نستخدم التشفير لحماية البيانات الحساسة أثناء النقل.</li>
+                <li data-translate="section4_li4">نقوم بمراجعة منتظمة لممارسات جمع البيانات وتخزينها ومعالجتها.</li>
+            </ul>
+        </div>
+
+        <div id="user-rights" class="section">
+            <h2><i class="fas fa-user-check"></i> <span data-translate="section5_title">حقوق المستخدم</span></h2>
+            <p data-translate="section5_p1">كمسخدم، لديك الحق في:</p>
+            <ul>
+                <li data-translate="section5_li1">الوصول إلى المعلومات الشخصية التي نحتفظ بها عنك.</li>
+                <li data-translate="section5_li2">طلب تصحيح المعلومات غير الدقيقة.</li>
+                <li data-translate="section5_li3">طلب حذف حسابك وبياناتك الشخصية.</li>
+                <li data-translate="section5_li4">سحب الموافقة على معالجة بياناتك.</li>
+            </ul>
+            <p data-translate="section5_p2">للمطالبة بأي من هذه الحقوق، يرجى الاتصال بنا عبر البريد الإلكتروني المذكور أدناه.</p>
+        </div>
+
+        <div id="children-privacy" class="section">
+            <h2><i class="fas fa-child"></i> <span data-translate="section6_title">خصوصية الأطفال</span></h2>
+            <p data-translate="section6_p1">تطبيقنا لا يوجه خدماته للأطفال دون سن 13 عامًا، ولا نجمع عن عمد معلومات شخصية من الأطفال. إذا اكتشفنا أننا جمعنا inadvertently معلومات من طفل دون سن 13 عامًا، سنقوم بحذف هذه المعلومات في أسرع وقت ممكن.</p>
+        </div>
+
+        <div id="policy-changes" class="section">
+            <h2><i class="fas fa-exchange-alt"></i> <span data-translate="section7_title">التغييرات على السياسة</span></h2>
+            <p data-translate="section7_p1">قد نقوم بتحديث سياسة الخصوصية هذه من وقت لآخر. سنخطرك بأي تغييرات جوهرية عن طريق نشر الإشعار في التطبيق أو عبر البريد الإلكتروني إذا كان متاحًا.</p>
+            <div class="highlight">
+                <p data-translate="section7_highlight">استمرارك في استخدام التطبيق بعد أي تعديل على سياسة الخصوصية يعني موافقتك على هذه التعديلات. ننصحك بمراجعة هذه الصفحة بشكل دوري للاطلاع على أي تحديثات.</p>
+            </div>
+        </div>
+
+        <div id="contact" class="section">
+            <h2><i class="fas fa-envelope"></i> <span data-translate="section8_title">التواصل معنا</span></h2>
+            <p data-translate="section8_p1">إذا كان لديك أي أسئلة أو استفسارات حول سياسة الخصوصية هذه، يرجى التواصل معنا عبر:</p>
+
+            <div class="contact-info">
+                <h3 data-translate="contact_title">طرق التواصل</h3>
+                <div class="contact-details">
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <span>salah22app@gmail.com</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <span>+967734249712</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</div>
+
+<script>
+    // بيانات الترجمة الكاملة
+    const translations = {
+        ar: {
+            privacy_title: "سياسة الخصوصية",
+            privacy_description: "نحن في تطبيق 'محفظتي الذكية' ندرك أهمية الخصوصية والأمان لمستخدمينا، وهذه السياسة توضح كيفية جمعنا واستخدامنا وحماية معلوماتك الشخصية.",
+            last_updated: "آخر تحديث: 15 سبتمبر 2025",
+            toc_title: "جدول المحتويات",
+            toc_item1: "المعلومات التي نجمعها",
+            toc_item2: "كيفية استخدام المعلومات",
+            toc_item3: "مشاركة المعلومات",
+            toc_item4: "أمان البيانات",
+            toc_item5: "حقوق المستخدم",
+            toc_item6: "خصوصية الأطفال",
+            toc_item7: "التغييرات على السياسة",
+            toc_item8: "التواصل معنا",
+            section1_title: "المعلومات التي نجمعها",
+            section1_p1: "نجمع أنواعًا محدودة من المعلومات لتحسين تجربتك في التطبيق وتقديم خدماتنا:",
+            section1_li1: "معلومات الحساب: عند تسجيل الدخول، نجمع البيانات مثل عنوان البريد الإلكتروني واسم المستخدم.",
+            section1_li2: "معلومات الجهاز: معرف فريد للجهاز ونموذجه وإصدار نظام التشغيل لأغراض الترخيص والأمان.",
+            section1_li3: "بيانات الاستخدام: عددالعمليات المنشأة وتفاعلاتك مع التطبيق.",
+            section1_li4: "بيانات الشركة: المعلومات التي تدخلها حول شركتك (الاسم، العنوان، معلومات الاتصال).",
+            section1_li5: "الصور: يتم تخزينها محليا في هاتفك ولا يتم رفعها الى اي سيرفر.",
+            section1_li6: "كلمة المرور: يتم تخزينها محليا في هاتفك ولا يتم رفعها الى اي سيرفر.",
+            section1_li7: "الموقع الجغرافي: يتم طلب منك تفعيل اموقع  بداية التسجيل ليتم انشاء عملتك المحلية وبامكانك ايقافة بعد التسجيل ويمكنك رفض تحديد موقعك.",
+            section1_highlight: "نحن لا نجمع أي معلومات شخصية حساسة مثل البيانات المالية أو معلومات الهوية إلا عند الضرورة القصوى لتقديم الخدمة، وذلك بأعلى معايير الأمان.",
+            section2_title: "كيفية استخدام المعلومات",
+            section2_p1: "نستخدم المعلومات التي نجمعها للأغراض التالية:",
+            section2_li1: "توفير خدمات التطبيق والوظائف الأساسية.",
+            section2_li2: "إدارة نظام الترخيص والتحقق من صحة المستخدم.",
+            section2_li3: "تحسين تجربة المستخدم وتطوير ميزات جديدة.",
+            section2_li4: "منع الاحتيال وإساءة الاستخدام.",
+            section2_li5: "الرد على استفسارات الدعم الفني.",
+            section2_li6: "إرسال تحديثات مهمة حول التطبيق (عند الضرورة).",
+            section3_title: "مشاركة المعلومات",
+            section3_p1: "نحن لا نبيع أو نؤجر معلوماتك الشخصية لأطراف ثالثة. قد نشارك معلومات محدودة في الحالات التالية:",
+            section3_li1: "مع مزودي الخدمات الذين يساعدوننا في تشغيل التطبيق (مثل Firebase من Google).",
+            section3_li2: "عندما يطلب القانون ذلك أو للاستجابة لإجراءات قانونية.",
+            section3_li3: "لحماية حقوقنا أو ممتلكاتنا أو سلامة مستخدمينا أو الآخرين.",
+            section3_highlight: "جميع شركائنا من مزودي الخدمات ملتزمون بمعايير الخصوصية والأمان ذاتها التي نلتزم بها، ويتم التعامل مع بياناتك بأقصى درجات السرية والحماية.",
+            section4_title: "أمان البيانات",
+            section4_p1: "نحن نستخدم إجراءات أمنية متعددة لحماية بياناتك:",
+            section4_li1: "يتم تخزين بيانات الحساب والأجهزة على خوادم Firebase المشفرة.",
+            section4_li2: "يتم تخزين بيانات صورتك وكلمة المرور محليًا على جهازك فقط.",
+            section4_li3: "نستخدم التشفير لحماية البيانات الحساسة أثناء النقل.",
+            section4_li4: "نقوم بمراجعة منتظمة لممارسات جمع البيانات وتخزينها ومعالجتها.",
+            section5_title: "حقوق المستخدم",
+            section5_p1: "كمسخدم، لديك الحق في:",
+            section5_li1: "الوصول إلى المعلومات الشخصية التي نحتفظ بها عنك.",
+            section5_li2: "طلب تصحيح المعلومات غير الدقيقة.",
+            section5_li3: "طلب حذف حسابك وبياناتك الشخصية.",
+            section5_li4: "سحب الموافقة على معالجة بياناتك.",
+            section5_p2: "للمطالبة بأي من هذه الحقوق، يرجى الاتصال بنا عبر البريد الإلكتروني المذكور أدناه.",
+            section6_title: "خصوصية الأطفال",
+            section6_p1: "تطبيقنا لا يوجه خدماته للأطفال دون سن 13 عامًا، ولا نجمع عن عمد معلومات شخصية من الأطفال. إذا اكتشفنا أننا جمعنا inadvertently معلومات من طفل دون سن 13 عامًا، سنقوم بحذف هذه المعلومات في أسرع وقت ممكن.",
+            section7_title: "التغييرات على السياسة",
+            section7_p1: "قد نقوم بتحديث سياسة الخصوصية هذه من وقت لآخر. سنخطرك بأي تغييرات جوهرية عن طريق نشر الإشعار في التطبيق أو عبر البريد الإلكتروني إذا كان متاحًا.",
+            section7_highlight: "استمرارك في استخدام التطبيق بعد أي تعديل على سياسة الخصوصية يعني موافقتك على هذه التعديلات. ننصحك بمراجعة هذه الصفحة بشكل دوري للاطلاع على أي تحديثات.",
+            section8_title: "التواصل معنا",
+            section8_p1: "إذا كان لديك أي أسئلة أو استفسارات حول سياسة الخصوصية هذه، يرجى التواصل معنا عبر:",
+            contact_title: "طرق التواصل",
+            agree_btn: "موافق ومستمر"
+        },
+        en: {
+            privacy_title: "Privacy Policy",
+            privacy_description: "We at 'My Smart Wallet App' recognize the importance of privacy and security for our users, and this policy explains how we collect, use, and protect your personal information.",
+            last_updated: "Last updated: September 15, 2025",
+            toc_title: "Table of Contents",
+            toc_item1: "Information We Collect",
+            toc_item2: "How We Use Information",
+            toc_item3: "Information Sharing",
+            toc_item4: "Data Security",
+            toc_item5: "User Rights",
+            toc_item6: "Children's Privacy",
+            toc_item7: "Policy Changes",
+            toc_item8: "Contact Us",
+            section1_title: "Information We Collect",
+            section1_p1: "We collect limited types of information to improve your experience in the app and provide our services:",
+            section1_li1: "Account information: When logging in, we collect data such as email address and username.",
+            section1_li2: "Device information: Unique device identifier, model, and operating system version for licensing and security purposes.",
+            section1_li3: "Usage data: Number of created operations and your interactions with the app.",
+            section1_li4: "Company data: Information you enter about your company (name, address, contact information).",
+            section1_li5: "Images: They are stored locally on your phone and are not uploaded to any server.",
+            section1_li6: "Password: It is stored locally on your phone and is not uploaded to any server.",
+            section1_li7: "Geographic location: You are asked to enable location at the beginning of registration to create your local currency, and you can disable it after registration, and you can refuse to determine your location.",
+            section1_highlight: "We do not collect any sensitive personal information such as financial data or identity information except when absolutely necessary to provide the service, with the highest security standards.",
+            section2_title: "How We Use Information",
+            section2_p1: "We use the information we collect for the following purposes:",
+            section2_li1: "Providing app services and core functions.",
+            section2_li2: "Managing the licensing system and validating users.",
+            section2_li3: "Improving user experience and developing new features.",
+            section2_li4: "Preventing fraud and misuse.",
+            section2_li5: "Responding to technical support inquiries.",
+            section2_li6: "Sending important updates about the app (when necessary).",
+            section3_title: "Information Sharing",
+            section3_p1: "We do not sell or rent your personal information to third parties. We may share limited information in the following cases:",
+            section3_li1: "With service providers who help us operate the app (such as Google's Firebase).",
+            section3_li2: "When required by law or to respond to legal proceedings.",
+            section3_li3: "To protect our rights, property, or the safety of our users or others.",
+            section3_highlight: "All our service provider partners are committed to the same privacy and security standards that we adhere to, and your data is handled with the utmost confidentiality and protection.",
+            section4_title: "Data Security",
+            section4_p1: "We use multiple security measures to protect your data:",
+            section4_li1: "Account and device data is stored on encrypted Firebase servers.",
+            section4_li2: "Your image and password data is stored locally on your device only.",
+            section4_li3: "We use encryption to protect sensitive data during transmission.",
+            section4_li4: "We regularly review data collection, storage, and processing practices.",
+            section5_title: "User Rights",
+            section5_p1: "As a user, you have the right to:",
+            section5_li1: "Access personal information we hold about you.",
+            section5_li2: "Request correction of inaccurate information.",
+            section5_li3: "Request deletion of your account and personal data.",
+            section5_li4: "Withdraw consent to process your data.",
+            section5_p2: "To claim any of these rights, please contact us via the email below.",
+            section6_title: "Children's Privacy",
+            section6_p1: "Our app does not direct its services to children under 13 years of age, and we do not knowingly collect personal information from children. If we discover that we have inadvertently collected information from a child under 13 years of age, we will delete this information as soon as possible.",
+            section7_title: "Policy Changes",
+            section7_p1: "We may update this privacy policy from time to time. We will notify you of any material changes by posting a notice in the app or via email if available.",
+            section7_highlight: "Your continued use of the app after any modification to the privacy policy means you agree to these modifications. We advise you to review this page periodically for any updates.",
+            section8_title: "Contact Us",
+            section8_p1: "If you have any questions or inquiries about this privacy policy, please contact us via:",
+            contact_title: "Contact Methods",
+            agree_btn: "Agree and Continue"
+        },
+        es: {
+            privacy_title: "Política de Privacidad",
+            privacy_description: "Nosotros en 'My Smart Wallet App' reconocemos la importancia de la privacidad y seguridad para nuestros usuarios, y esta política explica cómo recopilamos, utilizamos y protegemos su información personal.",
+            last_updated: "Última actualización: 15 de septiembre de 2025",
+            toc_title: "Tabla de Contenidos",
+            toc_item1: "Información que Recopilamos",
+            toc_item2: "Cómo Utilizamos la Información",
+            toc_item3: "Compartición de Información",
+            toc_item4: "Seguridad de Datos",
+            toc_item5: "Derechos del Usuario",
+            toc_item6: "Privacidad de los Niños",
+            toc_item7: "Cambios en la Política",
+            toc_item8: "Contáctenos",
+            section1_title: "Información que Recopilamos",
+            section1_p1: "Recopilamos tipos limitados de información para mejorar su experiencia en la aplicación y proporcionar nuestros servicios:",
+            section1_li1: "Información de la cuenta: Al iniciar sesión, recopilamos datos como dirección de correo electrónico y nombre de usuario.",
+            section1_li2: "Información del dispositivo: Identificador único del dispositivo, modelo y versión del sistema operativo con fines de licencia y seguridad.",
+            section1_li3: "Datos de uso: Número de operaciones creadas y sus interacciones con la aplicación.",
+            section1_li4: "Datos de la empresa: Información que ingresa sobre su empresa (nombre, dirección, información de contacto).",
+            section1_li5: "Imágenes: Se almacenan localmente en su teléfono y no se cargan en ningún servidor.",
+            section1_li6: "Contraseña: Se almacena localmente en su teléfono y no se carga en ningún servidor.",
+            section1_li7: "Ubicación geográfica: Se le solicita habilitar la ubicación al comienzo del registro para crear su moneda local, y puede desactivarla después del registro, y puede rechazar determinar su ubicación.",
+            section1_highlight: "No recopilamos información personal sensible como datos financieros o información de identidad excepto cuando es absolutamente necesario para prestar el servicio, con los más altos estándares de seguridad.",
+            section2_title: "Cómo Utilizamos la Información",
+            section2_p1: "Utilizamos la información que recopilamos para los siguientes propósitos:",
+            section2_li1: "Proporcionar servicios de la aplicación y funciones principales.",
+            section2_li2: "Gestionar el sistema de licencias y validar usuarios.",
+            section2_li3: "Mejorar la experiencia del usuario y desarrollar nuevas características.",
+            section2_li4: "Prevenir fraudes y mal uso.",
+            section2_li5: "Responder a consultas de soporte técnico.",
+            section2_li6: "Enviar actualizaciones importantes sobre la aplicación (cuando sea necesario).",
+            section3_title: "Compartición de Información",
+            section3_p1: "No vendemos ni alquilamos su información personal a terceros. Podemos compartir información limitada en los siguientes casos:",
+            section3_li1: "Con proveedores de servicios que nos ayudan a operar la aplicación (como Firebase de Google).",
+            section3_li2: "Cuando lo requiere la ley o para responder a procedimientos legales.",
+            section3_li3: "Para proteger nuestros derechos, propiedad o la seguridad de nuestros usuarios u otros.",
+            section3_highlight: "Todos nuestros socios proveedores de servicios están comprometidos con los mismos estándares de privacidad y seguridad que nosotros cumplimos, y sus datos se manejan con la máxima confidencialidad y protección.",
+            section4_title: "Seguridad de Datos",
+            section4_p1: "Utilizamos múltiples medidas de seguridad para proteger sus datos:",
+            section4_li1: "Los datos de cuenta y dispositivo se almacenan en servidores Firebase encriptados.",
+            section4_li2: "Sus datos de imagen y contraseña se almacenan localmente solo en su dispositivo.",
+            section4_li3: "Utilizamos encriptación para proteger datos sensibles durante la transmisión.",
+            section4_li4: "Revisamos regularmente las prácticas de recopilación, almacenamiento y procesamiento de datos.",
+            section5_title: "Derechos del Usuario",
+            section5_p1: "Como usuario, tiene derecho a:",
+            section5_li1: "Acceder a la información personal que mantenemos sobre usted.",
+            section5_li2: "Solicitar corrección de información inexacta.",
+            section5_li3: "Solicitar eliminación de su cuenta y datos personales.",
+            section5_li4: "Retirar el consentimiento para procesar sus datos.",
+            section5_p2: "Para reclamar cualquiera de estos derechos, por favor contáctenos a través del correo electrónico a continuación.",
+            section6_title: "Privacidad de los Niños",
+            section6_p1: "Nuestra aplicación no dirige sus servicios a niños menores de 13 años, y no recopilamos intencionalmente información personal de niños. Si descubrimos que hemos recopilado inadvertidamente información de un niño menor de 13 años, eliminaremos esta información lo antes posible.",
+            section7_title: "Cambios en la Política",
+            section7_p1: "Podemos actualizar esta política de privacidad de vez en cuando. Le notificaremos cualquier cambio material publicando un aviso en la aplicación o por correo electrónico si está disponible.",
+            section7_highlight: "Su continuo uso de la aplicación después de cualquier modificación a la política de privacidad significa que acepta estas modificaciones. Le aconsejamos que revise esta página periódicamente para ver actualizaciones.",
+            section8_title: "Contáctenos",
+            section8_p1: "Si tiene alguna pregunta o consulta sobre esta política de privacidad, por favor contáctenos a través de:",
+            contact_title: "Métodos de Contacto",
+            agree_btn: "Aceptar y Continuar"
+        }
+    };
+
+    // دالة تغيير اللغة
+    function changeLanguage(lang) {
+        document.documentElement.lang = lang;
+        document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+        
+        // تحديث النصوص المترجمة
+        const elements = document.querySelectorAll('[data-translate]');
+        elements.forEach(element => {
+            const key = element.getAttribute('data-translate');
+            if (translations[lang] && translations[lang][key]) {
+                element.textContent = translations[lang][key];
+            }
+        });
+        
+        // تحديث حالة أزرار اللغة
+        document.querySelectorAll('.language-selector button').forEach(button => {
+            button.classList.remove('active');
+        });
+        event.target.classList.add('active');
+        
+        // حفظ اللغة المختارة
+        localStorage.setItem('selectedLanguage', lang);
+    }
+
+    // عند تحميل الصفحة، تحميل الإعدادات المحفوظة
+    document.addEventListener("DOMContentLoaded", function() {
+        const savedLanguage = localStorage.getItem('selectedLanguage') || 'ar';
+        
+        // تفعيل الزر المناسب للغة
+        document.querySelectorAll('.language-selector button').forEach(button => {
+            if (button.textContent === 'العربية' && savedLanguage === 'ar') {
+                button.classList.add('active');
+            } else if (button.textContent === 'English' && savedLanguage === 'en') {
+                button.classList.add('active');
+            } else if (button.textContent === 'Español' && savedLanguage === 'es') {
+                button.classList.add('active');
+            }
+        });
+        
+        changeLanguage(savedLanguage);
+        
+        // تسهيل التنقل بين الأقسام
+        const links = document.querySelectorAll('.toc a');
+
+        links.forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').substring(1);
+                const targetElement = document.getElementById(targetId);
+
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    });
+
+    // إضافة دالة التكبير والتصغير بالإيماءات
+    document.addEventListener('DOMContentLoaded', function() {
+        let initialDistance = null;
+        let currentScale = 1;
+        const content = document.body;
+
+        content.addEventListener('touchstart', function(e) {
+            if (e.touches.length === 2) {
+                e.preventDefault();
+                initialDistance = Math.hypot(
+                    e.touches[1].clientX - e.touches[0].clientX,
+                    e.touches[1].clientY - e.touches[0].clientY
+                );
+            }
+        });
+
+        content.addEventListener('touchmove', function(e) {
+            if (e.touches.length === 2 && initialDistance !== null) {
+                e.preventDefault();
+                const currentDistance = Math.hypot(
+                    e.touches[1].clientX - e.touches[0].clientX,
+                    e.touches[1].clientY - e.touches[0].clientY
+                );
+
+                if (initialDistance > 0) {
+                    const scale = currentDistance / initialDistance;
+                    const newScale = Math.max(0.8, Math.min(scale * currentScale, 2));
+
+                    content.style.transform = `scale(${newScale})`;
+                    content.style.transformOrigin = 'center center';
+                }
+            }
+        });
+
+        content.addEventListener('touchend', function() {
+            if (initialDistance !== null) {
+                const computedStyle = window.getComputedStyle(content);
+                const matrix = new DOMMatrixReadOnly(computedStyle.transform);
+                currentScale = matrix.a;
+
+                initialDistance = null;
+            }
+        });
+    });
+
+    function closeDialog() {
+        if (typeof android !== 'undefined' && android.closePrivacyDialog) {
+            android.closePrivacyDialog();
+        } else {
+            // Fallback للإغلاق إذا لم تكن الواجهة متاحة
+            console.log("Android interface not available");
+            alert("شكرًا لموافقتك على سياسة الخصوصية");
+        }
+    }
+</script>
+</body>
+</html>
